@@ -6,9 +6,10 @@
     <title>home</title>
 </head>
 <body>
+<h1>메인 페이지</h1>
 <button type="button" onClick="location.href='/members/new'" sec:authorize="isAnonymous()">회원가입</button>
 <button type="button" onClick="location.href='/members/login'" sec:authorize="isAnonymous()">로그인</button>
 <button type="button" onClick="location.href='/members/myPage'" sec:authorize="isAuthenticated()">MyPage</button>
-<button type="button" onClick="location.href='/members/myPage'" sec:authorize="isAuthenticated()">로그아웃</button>
+<button type="button" onClick="location.href='/members/logout'" sec:authorize="isAuthenticated()">로그아웃</button>
 </body>
 </html>
