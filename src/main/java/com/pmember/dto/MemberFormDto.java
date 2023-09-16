@@ -1,7 +1,9 @@
 package com.pmember.dto;
 
+import com.pmember.entity.Member;
 import lombok.Getter;
 import lombok.Setter;
+import org.modelmapper.ModelMapper;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -20,4 +22,10 @@ public class MemberFormDto {
 
     @NotEmpty(message = "비밀번호는 필수 입력 값입니다.")
     private String password;
+
+    private static ModelMapper modelMapper = new ModelMapper();
+
+    public static MemberFormDto of(Member member) {
+        return modelMapper.map(member, MemberFormDto.class);
+    }
 }

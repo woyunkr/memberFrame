@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>myPage</title>
+</head>
+<body>
+<h1>마이 페이지</h1>
+<h2  th:text="${#authentication.name} + '님의 마이페이지'">마이페이지</h2>
+<button type="button" onClick="location.href='/myPage/myInfo'">나의 정보</button>
+<button type="button" onClick="location.href='/myPage/myProfile'">프로필</button>
+</body>
+</html>

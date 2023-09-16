@@ -5,6 +5,7 @@ import com.pmember.dto.MemberFormDto;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
@@ -12,8 +13,8 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-@RequiredArgsConstructor
 @Table(name = "member")
+@ToString
 public class Member {
 
     @Id

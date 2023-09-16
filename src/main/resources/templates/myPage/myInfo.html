@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>myInfo</title>
+</head>
+<body>
+<h1>개인정보 페이지</h1>
+<div>
+    이름 : <span th:text="${memberInfo.name}"></span>
+</div>
+<div>
+    이메일 : <span th:text="${memberInfo.email}"></span>
+</div>
+</body>
+</html>
