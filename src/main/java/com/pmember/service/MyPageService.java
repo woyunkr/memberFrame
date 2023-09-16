@@ -19,8 +19,8 @@ public class MyPageService {
     private final MemberRepository memberRepository;
     private final MyPageRepository myPageRepository;
 
-    public MemberFormDto getMemberInfo(String showId) {
-        Member member = memberRepository.findByShowId(showId);
+    public MemberFormDto getMemberInfo(String email) {
+        Member member = memberRepository.findByEmail(email);
         MemberFormDto memberInfo = new MemberFormDto();
         memberInfo.setEmail(member.getEmail());
         memberInfo.setName(member.getName());
