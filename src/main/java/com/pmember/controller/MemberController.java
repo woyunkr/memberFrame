@@ -2,6 +2,8 @@ package com.pmember.controller;
 
 import com.pmember.dto.MemberFormDto;
 import com.pmember.entity.Member;
+import com.pmember.exception.EmailAlreadyExist;
+import com.pmember.exception.ShowIdAlreadyExist;
 import com.pmember.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;
@@ -34,15 +36,22 @@ public class MemberController {
         if (bindingResult.hasErrors()) {
             return "member/memberForm";
         }
+
         try {
             Member member = Member.createMember(memberFormDto, passwordEncoder);
             memberService.saveMember(member);
-        } catch (IllegalStateException e) {
+        } catch (EmailAlreadyExist e) {
+            // 이미 가입된 이메일이 있는 경우 오류 메시지를 이메일 관련 변수에 저장합니다.
             model.addAttribute("errorMessage", e.getMessage());
+            return "member/memberForm";
+        } catch (ShowIdAlreadyExist e) {
+            // 이미 가입된 아이디가 있는 경우 오류 메시지를 아이디 관련 변수에 저장합니다.
+            model.addAttribute("errorMessage1", e.getMessage());
             return "member/memberForm";
         }
         return "redirect:/";
     }
+
 
     @GetMapping(value = "/login")
     public String memberLoginForm(Model model) {

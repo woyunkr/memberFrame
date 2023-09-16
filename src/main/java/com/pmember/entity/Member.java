@@ -27,6 +27,9 @@ public class Member {
     @Column(unique = true)
     private String email;
 
+    @Column(unique = true)
+    private String showId;
+
     private String password;
 
     @Enumerated(EnumType.STRING)
@@ -37,6 +40,7 @@ public class Member {
 
         member.setName(memberFormDto.getName());
         member.setEmail(memberFormDto.getEmail());
+        member.setShowId(memberFormDto.getShowId());
         member.setPassword(memberFormDto.getPassword());
         String password = passwordEncoder.encode(memberFormDto.getPassword());
         member.setPassword(password);
@@ -44,5 +48,7 @@ public class Member {
 
         return member;
     }
+
+
 
 }

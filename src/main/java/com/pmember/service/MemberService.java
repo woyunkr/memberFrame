@@ -1,6 +1,9 @@
 package com.pmember.service;
 
+import com.pmember.dto.MemberFormDto;
 import com.pmember.entity.Member;
+import com.pmember.exception.EmailAlreadyExist;
+import com.pmember.exception.ShowIdAlreadyExist;
 import com.pmember.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;
@@ -23,23 +26,28 @@ public class MemberService implements UserDetailsService {
     }
 
     private void validateDuplicateMember(Member member) {
-        Member findMember = memberRepository.findByEmail(member.getEmail());
-        if (findMember != null) {
-            throw new IllegalStateException("이미 가입된 회원입니다.");
+        Member findMemberEmail = memberRepository.findByEmail(member.getEmail());
+        if (findMemberEmail != null) {
+            throw new EmailAlreadyExist("이미 가입된 이메일입니다.");
+        }
+
+        Member findMemberId = memberRepository.findByShowId(member.getShowId());
+        if (findMemberId != null) {
+            throw new ShowIdAlreadyExist("이미 존재하는 아이디입니다.");
         }
     }
 
     @Override
     //이거 하니까 기본 로그인 정보 생성 안됨
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Member member = memberRepository.findByEmail(email);
+    public UserDetails loadUserByUsername(String showId) throws UsernameNotFoundException {
+        Member member = memberRepository.findByShowId(showId);
 
         if (member == null) {
-            throw new UsernameNotFoundException(email);
+            throw new UsernameNotFoundException(showId);
         }
 
         return User.builder()
-                .username(email)
+                .username(showId)
                 .password(member.getPassword())
                 .roles(member.getRole().toString())
                 .build();

@@ -20,6 +20,9 @@ public class MemberFormDto {
     @Email(message = "올바른 이메일 형식을 입력해 주세요")
     private String email;
 
+    @NotEmpty(message = "아이디는 필수 입력 값입니다.")
+    private String showId;
+
     @NotEmpty(message = "비밀번호는 필수 입력 값입니다.")
     private String password;
 

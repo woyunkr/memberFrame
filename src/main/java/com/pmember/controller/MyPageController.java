@@ -28,11 +28,11 @@ public class MyPageController {
     @GetMapping(value = "myInfo")
     public String myInfo(Model model, Authentication authentication){
 
-        String email = authentication.getName();
+        String showId = authentication.getName();
 
 
         // 이메일을 기반으로 회원 정보를 가져와서 MemberFormDto에 설정합니다.
-        MemberFormDto memberFormDto = myPageService.getMemberInfo(email);
+        MemberFormDto memberFormDto = myPageService.getMemberInfo(showId);
 
 
         model.addAttribute("memberInfo", memberFormDto);
